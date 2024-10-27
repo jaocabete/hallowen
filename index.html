@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix</title>
+    <link type="text/css" rel="stylesheet" href="matrix.css">
+    <link rel="icon" type="image/x-icon" href="MatrixIconSimple.png">
+</head>
+<body>
+
+<div class="maindiv">
+    <h1>Cadastro</h1>
+    <table id="registoTable" class="table-registados">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Nome do Grupo</th>
+                <th>Numero de Elementos</th>
+                
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="container">
+        <div>
+        <!-- Table for "Preparar" -->
+        <h1>Grupos a Preparar</h3>
+        <table id="prepararTable">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th width="200px">Nome do Grupo</th>
+                    <th width="50px">Numero de Elementos</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div>
+        <!-- Table for "Entrar" -->
+        <h1>Grupo a Entrar</h3>
+        <table id="entrarTable">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th width="200px">Nome do Grupo</th>
+                    <th width="50px">Numero de Elementos</th>                    
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div>
+        <!-- Table for "Dentro" -->
+        <h1>Grupos Dentro</h3>
+        <table id="dentroTable">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th width="200px">Nome do Grupo</th>
+                    <th width="50px">Numero de Elementos</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<div id="currentTime"></div>
+<div>
+    
+
+    <audio id="background-music" src="matrix.wav"></audio>
+    <canvas id="c"></canvas>
+    <script src="matrix.js"></script>
+    <script>
+        
+        // Function to populate a table
+        function populateTable(data, tableId) {
+            const tableBody = document.getElementById(tableId).querySelector("tbody");
+            tableBody.innerHTML = "";
+
+            data.forEach(row => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row.Timestamp}</td>
+                    <td>${row["Nome do Grupo"]}</td>
+                    
+                    <td>${row["Numero de Elementos"]}</td>
+                    
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function updateTime() {
+            // Create a new Date object
+            const now = new Date();
+
+            // Get the current hours, minutes, and seconds
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+
+            // Format the time string
+            const timeString = `${hours}:${minutes}:${seconds}`;
+
+            // Update the HTML element with the current time
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+
+        async function fetchData() {
+            const url = "https://opensheet.elk.sh/1m9mN3eWLNjTPsR_1XBm3ei-6hU4qkordkm0IU8tDdhg/hallowen";
+            try {
+                const response = await fetch(url);
+                const jsonData = await response.json();
+
+                let prepararData = [];
+                let entrarData = [];
+                let dentroData = [];
+                let registoData = [];
+
+                // Split the data based on "Estado" value
+                 prepararData = jsonData.filter(item => item.Estado === "Preparar").slice(0, 5);
+                 entrarData = jsonData.filter(item => item.Estado === "Entrar").slice(0, 5);
+                 dentroData = jsonData.filter(item => item.Estado === "Dentro").slice(0, 5);
+                 registoData = jsonData.filter(item => item.Estado === "Registo").slice(0, 10);
+
+                // Populate each table
+                populateTable(prepararData, "prepararTable");
+                populateTable(entrarData, "entrarTable");
+                populateTable(dentroData, "dentroTable");
+                populateTable(registoData, "registoTable");
+                updateTime();
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        // Fetch data initially and then every 60 seconds
+        fetchData();
+        setInterval(fetchData, 60000);
+    </script>
+</body>
+</html>
