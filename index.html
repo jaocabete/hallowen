@@ -19,19 +19,19 @@
         <p>GRUPO(s) A ENTRAR</p>
         <div class="text-9xl">3</div>
         <p class="text-sm">Previsão Horaria</p>
-        <div class="text-xl">5:22</div>
+        <div id="time-01" class="text-xl">5:22</div>
     </div>
     <div class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
         <p>GRUPO(s) A ENTRAR</p>
         <div class="text-9xl">3</div>
         <p class="text-sm">Previsão Horaria</p>
-        <div class="text-xl">5:22</div>
+        <div id="time-02" class="text-xl">5:22</div>
     </div>
     <div class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
         <p>GRUPO(s) A ENTRAR</p>
         <div class="text-9xl">3</div>
         <p class="text-sm">Previsão Horaria</p>
-        <div class="text-xl">5:22</div>
+        <div id="time-03" class="text-xl">5:22</div>
     </div>
 </div>
 
@@ -46,10 +46,10 @@
             <div class="border p-2">7</div>
         </div>
         <div class="grid grid-cols-4 gap-1 text-center text-2xl bg-gray-100">
-            <div class="border p-2">5:25</div>
-            <div class="border p-2">5:27</div>
-            <div class="border p-2">5:30</div>
-            <div class="border p-2">5:33</div>
+            <div id="time-04" class="border p-2">5:25</div>
+            <div id="time-05" class="border p-2">5:27</div>
+            <div id="time-06" class="border p-2">5:30</div>
+            <div id="time-07" class="border p-2">5:33</div>
         </div>
     </div>
 
@@ -72,19 +72,143 @@
             <div class="border p-2">18</div>
         </div>
         <div class="grid grid-cols-11 gap-1 text-center text-2xl bg-gray-100">
-            <div class="border p-2">5:36</div>
-            <div class="border p-2">5:38</div>
-            <div class="border p-2">5:41</div>
-            <div class="border p-2">5:44</div>
-            <div class="border p-2">5:47</div>
-            <div class="border p-2">5:49</div>
-            <div class="border p-2">5:52</div>
-            <div class="border p-2">5:55</div>
-            <div class="border p-2">5:58</div>
-            <div class="border p-2">6:00</div>
-            <div class="border p-2">6:03</div>
+            <div id="time-08" class="border p-2">5:36</div>
+            <div id="time-09" class="border p-2">5:38</div>
+            <div id="time-10" class="border p-2">5:41</div>
+            <div id="time-11" class="border p-2">5:44</div>
+            <div id="time-12" class="border p-2">5:47</div>
+            <div id="time-13" class="border p-2">5:49</div>
+            <div id="time-14" class="border p-2">5:52</div>
+            <div id="time-15" class="border p-2">5:55</div>
+            <div id="time-16" class="border p-2">5:58</div>
+            <div id="time-17" class="border p-2">6:00</div>
+            <div id="time-18" class="border p-2">6:03</div>
         </div>
     </div>
 
 </body>
+<script>
+function getTimevalue(date) {
+    // Format the time (e.g., HH:MM)
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    
+    return `${hours}:${minutes}`;
+}
+
+function updateTime() {
+    const timeInterval = 3; // Minutes to add for each subsequent time
+
+    // Get the current time
+    const now = new Date();
+
+    // Create new Date instances for each time to prevent overwriting
+    const time = new Date(now);
+    const time3 = new Date(now);
+    const time4 = new Date(now);
+    const time5 = new Date(now);
+    const time6 = new Date(now);
+    const time7 = new Date(now);
+    const time8 = new Date(now);
+    const time9 = new Date(now);
+    const time10 = new Date(now);
+    const time11 = new Date(now);
+    const time12 = new Date(now);
+    const time13 = new Date(now);
+    const time14 = new Date(now);
+    const time15 = new Date(now);
+    const time16 = new Date(now);
+    const time17 = new Date(now);
+    const time18 = new Date(now);
+
+    // Set the minutes by adding intervals
+    time4.setMinutes(now.getMinutes() + timeInterval);
+    time5.setMinutes(now.getMinutes() + 2 * timeInterval);
+    time6.setMinutes(now.getMinutes() + 3 * timeInterval);
+    time7.setMinutes(now.getMinutes() + 4 * timeInterval);
+    time8.setMinutes(now.getMinutes() + 5 * timeInterval);
+    time9.setMinutes(now.getMinutes() + 6 * timeInterval);
+    time10.setMinutes(now.getMinutes() + 7 * timeInterval);
+    time11.setMinutes(now.getMinutes() + 8 * timeInterval);
+    time12.setMinutes(now.getMinutes() + 9 * timeInterval);
+    time13.setMinutes(now.getMinutes() + 10 * timeInterval);
+    time14.setMinutes(now.getMinutes() + 11 * timeInterval);
+    time15.setMinutes(now.getMinutes() + 12 * timeInterval);
+    time16.setMinutes(now.getMinutes() + 13 * timeInterval);
+    time17.setMinutes(now.getMinutes() + 14 * timeInterval);
+    time18.setMinutes(now.getMinutes() + 15 * timeInterval);
+    
+
+    // Update the divs with the formatted times
+    document.getElementById("time-01").textContent = getTimevalue(now);
+    document.getElementById("time-02").textContent = getTimevalue(now)
+    document.getElementById("time-03").textContent = getTimevalue(now);
+    document.getElementById("time-04").textContent = getTimevalue(time4);
+    document.getElementById("time-05").textContent = getTimevalue(time5);
+    document.getElementById("time-06").textContent = getTimevalue(time6);
+    document.getElementById("time-07").textContent = getTimevalue(time7);
+    document.getElementById("time-08").textContent = getTimevalue(time8);
+    document.getElementById("time-09").textContent = getTimevalue(time9);
+    document.getElementById("time-10").textContent = getTimevalue(time10);
+    document.getElementById("time-11").textContent = getTimevalue(time11);
+    document.getElementById("time-12").textContent = getTimevalue(time12);
+    document.getElementById("time-13").textContent = getTimevalue(time13);
+    document.getElementById("time-14").textContent = getTimevalue(time14);
+    document.getElementById("time-15").textContent = getTimevalue(time15);
+    document.getElementById("time-16").textContent = getTimevalue(time16);
+    document.getElementById("time-17").textContent = getTimevalue(time17);
+    document.getElementById("time-18").textContent = getTimevalue(time18);
+    
+
+}
+
+
+async function getServiceToken() {
+    const tenantId = "58f6240d-d7f2-4466-822f-adbd4cb0195d";
+    const clientId = "2517673d-7eeb-4b02-983c-d47acc83afc4";
+    const clientSecret = "kP.8Q~JADaDiO5yKaLjQYBoqQ4SaRUizPcjokac0";
+    const scope = "https://orge71f8d25.crm15.dynamics.com/user_impersonation";
+
+    const url = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
+
+    const params = new URLSearchParams({
+        client_id: clientId,
+        scope: scope,
+        grant_type: "client_credentials",
+        client_secret: clientSecret
+    });
+
+    const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString()
+    });
+
+    const tokenData = await response.json();
+    console.log("Access Token:", tokenData.access_token);
+    return tokenData.access_token;
+}
+// Call the function initially and set an interval if you want it to update regularly
+
+let accessToken = getServiceToken();
+
+function getdata() {
+fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$top=10', {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'OData-MaxVersion': '4.0',
+        'OData-Version': '4.0',
+        'Accept': 'application/json'
+    }
+}).then(response => response.json())
+  .then(data => console.log(data));
+
+}
+
+
+updateTime();
+setInterval(updateTime, 60000); // Update every minute
+
+    </script>
 </html>
