@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caminhada do Terror 2024</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.4.4/js/msal.min.js"></script>
 </head>
 <body class="bg-gray-100 p-4 font-sans">
 
+     <h1>Authenticate and Acquire Token</h1>
+    <button onclick="signInAndGetToken()">Sign In and Get Token</button>
+    
     <!-- Header -->
     <div class="bg-yellow-500 text-red-800 font-bold text-6xl p-4 text-center tracking-widest">
         CAMINHADA DO TERROR 2024
@@ -210,5 +214,58 @@ fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistrati
 updateTime();
 setInterval(updateTime, 60000); // Update every minute
 
+    </script>
+     <script>
+        // MSAL configuration
+        const msalConfig = {
+            auth: {
+                clientId: "2517673d-7eeb-4b02-983c-d47acc83afc4", // Replace with your Azure AD Application (client) ID
+                authority: "https://login.microsoftonline.com/58f6240d-d7f2-4466-822f-adbd4cb0195d", // Replace with your Tenant ID or 'common' for multi-tenant
+                redirectUri: "https://jaocabete.github.io" // Replace with your app's redirect URI
+            }
+        };
+
+        // Initialize MSAL client
+        const msalClient = new Msal.UserAgentApplication(msalConfig);
+
+        // Login request configuration
+        const loginRequest = {
+            scopes: ["openid", "profile", "User.Read"] // Microsoft Graph scopes as an example
+        };
+
+        // Token request configuration
+        const tokenRequest = {
+            scopes: ["User.Read"] // Scope needed for the access token
+        };
+
+        // Function to sign in and acquire token
+        function signInAndGetToken() {
+            msalClient.loginPopup(loginRequest)
+                .then(loginResponse => {
+                    console.log("User logged in:", loginResponse);
+                    
+                    // After successful login, request an access token
+                    msalClient.acquireTokenSilent(tokenRequest)
+                        .then(tokenResponse => {
+                            console.log("Access Token acquired:", tokenResponse.accessToken);
+                            // Use the access token in your application logic
+                        })
+                        .catch(error => {
+                            console.error("Silent token acquisition failed:", error);
+
+                            // If silent token acquisition fails, fallback to interactive method
+                            msalClient.acquireTokenPopup(tokenRequest)
+                                .then(tokenResponse => {
+                                    console.log("Access Token acquired via popup:", tokenResponse.accessToken);
+                                })
+                                .catch(error => {
+                                    console.error("Token acquisition failed via popup:", error);
+                                });
+                        });
+                })
+                .catch(error => {
+                    console.error("Login failed:", error);
+                });
+        }
     </script>
 </html>
