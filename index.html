@@ -92,6 +92,9 @@
 </body>
 <script>
 
+    let  timeInterval =  3;
+
+    
   function isPending(promise) {
     const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 0, "pending"));
 
@@ -162,17 +165,16 @@ function updateTime() {
     fetchAndSortEmEspera();
 } 
 */
+ fetchSettingMinuto().then((result) => {
 
-    fetchSettingMinuto().then((result) => {
 
-
-    const timeInterval = result;
+    
+     timeInterval =  result ;
     // Get the current time
     const now = new Date();
 
     // Create new Date instances for each time to prevent overwriting
     const time = new Date(now);
-    const time3 = new Date(now);
     const time4 = new Date(now);
     const time5 = new Date(now);
     const time6 = new Date(now);
