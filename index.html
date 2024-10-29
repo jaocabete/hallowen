@@ -23,13 +23,13 @@
         <p class="text-xl">Previsão Horaria</p>
         <div id="time-01" class="text-3xl">5:22</div>
     </div>
-    <div class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
+    <div class="bg-red-600 text-white font-bold text-6xl p-4 rounded text-center">
         <p>GRUPO(s) A ENTRAR</p>
         <div id="pos-2" class="text-9xl">3</div>
         <p class="text-xl">Previsão Horaria</p>
         <div id="time-02" class="text-3xl">5:22</div>
     </div>
-    <div class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
+    <div class="bg-red-600 text-white font-bold text-6xl p-4 rounded text-center">
         <p>GRUPO(s) A ENTRAR</p>
         <div id="pos-3" class="text-9xl">3</div>
         <p class="text-xl">Previsão Horaria</p>
@@ -46,12 +46,14 @@
             <div id="pos-5" class="border p-2">5</div>
             <div id="pos-6" class="border p-2">6</div>
             <div id="pos-7" class="border p-2">7</div>
+             <div id="pos-8" class="border p-2">8</div>
         </div>
         <div class="grid grid-cols-4 gap-1 text-center text-3xl bg-gray-100">
             <div id="time-04" class="border p-2">5:25</div>
             <div id="time-05" class="border p-2">5:27</div>
             <div id="time-06" class="border p-2">5:30</div>
             <div id="time-07" class="border p-2">5:33</div>
+            <div id="time-08" class="border p-2">5:33</div>
         </div>
     </div>
 
@@ -61,7 +63,6 @@
             PREVISÃO DE ENTRADA PARA OS SEGUINTES GRUPOS - (SÓ DEVEM FORMAR NA FILA QUANDO PASSAREM PARA A LINHA DE CIMA)
         </div>
         <div class="grid grid-cols-11 gap-1 text-center text-7xl font-semibold bg-white">
-            <div id="pos-8" class="border p-2">8</div>
             <div id="pos-9" class="border p-2">9</div>
             <div id="pos-10" class="border p-2">10</div>
             <div id="pos-11" class="border p-2">11</div>
@@ -72,9 +73,9 @@
             <div id="pos-16" class="border p-2">16</div>
             <div id="pos-17" class="border p-2">17</div>
             <div id="pos-18" class="border p-2">18</div>
+            <div id="pos-19" class="border p-2">19</div>
         </div>
         <div class="grid grid-cols-11 gap-1 text-center text-3xl bg-gray-100">
-            <div id="time-08" class="border p-2">5:36</div>
             <div id="time-09" class="border p-2">5:38</div>
             <div id="time-10" class="border p-2">5:41</div>
             <div id="time-11" class="border p-2">5:44</div>
@@ -85,6 +86,7 @@
             <div id="time-16" class="border p-2">5:58</div>
             <div id="time-17" class="border p-2">6:00</div>
             <div id="time-18" class="border p-2">6:03</div>
+            <div id="time-19" class="border p-2">6:06</div>
         </div>
     </div> 
 </body>
@@ -162,6 +164,7 @@ function updateTime() {
     const time16 = new Date(now);
     const time17 = new Date(now);
     const time18 = new Date(now);
+    const time19 = new Date(now);
 
     // Set the minutes by adding intervals
     time4.setMinutes(now.getMinutes() + timeInterval);
@@ -179,6 +182,7 @@ function updateTime() {
     time16.setMinutes(now.getMinutes() + 13 * timeInterval);
     time17.setMinutes(now.getMinutes() + 14 * timeInterval);
     time18.setMinutes(now.getMinutes() + 15 * timeInterval);
+    time19.setMinutes(now.getMinutes() + 16 * timeInterval);
     
 
     // Update the divs with the formatted times
@@ -200,6 +204,7 @@ function updateTime() {
     document.getElementById("time-16").textContent = getTimevalue(time16);
     document.getElementById("time-17").textContent = getTimevalue(time17);
     document.getElementById("time-18").textContent = getTimevalue(time18);
+    document.getElementById("time-19").textContent = getTimevalue(time19);
     
 
 }
