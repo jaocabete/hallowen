@@ -230,7 +230,10 @@ setInterval(updateTime, 60000); // Update every minute
                 clientId: "2517673d-7eeb-4b02-983c-d47acc83afc4", // Replace with your Azure AD Application (client) ID
                 authority: "https://login.microsoftonline.com/58f6240d-d7f2-4466-822f-adbd4cb0195d", // Replace with your Tenant ID or 'common' for multi-tenant
                 redirectUri: "https://jaocabete.github.io" // Replace with your app's redirect URI
-            }
+            },
+             cache: {
+       cacheLocation: BrowserCacheLocation.SessionStorage // "sessionStorage"
+    }
         };
 
         // Initialize MSAL client
