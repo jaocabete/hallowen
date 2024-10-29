@@ -92,13 +92,10 @@
 </body>
 <script>
 
-    function isPromise(value) {
-    return (
-        typeof value === 'object' &&
-        value !== null &&
-        typeof value.then === 'function' &&
-        typeof value.catch === 'function'
-    );
+  function isPending(promise) {
+    const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 0, "pending"));
+
+    return Promise.race([promise, timeoutPromise]).then((result) => result === "pending");
 }
     
     // Function to set a cookie
@@ -141,7 +138,7 @@ function getTimevalue(date) {
     accessToken = fetchd();
     
 function updateTime() {
-    if (!isPromise(accessToken)){
+    if (!isPending(accessToken)){
         fetchAndSortaEntrar();
         fetchAndSortNafila();
         fetchAndSortEmEspera();
@@ -460,6 +457,6 @@ async function fetchAndSortEmEspera() {
 
     
 updateTime();
-setInterval(updateTime, 60000); // Update every minute
+setInterval(updateTime, 5000); // Update every minute
     </script>
 </html>
