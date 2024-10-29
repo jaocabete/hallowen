@@ -137,10 +137,11 @@ function getTimevalue(date) {
         }
 function updateTime() {
      try{
-          const accessToken = fetchd().then();
-      fetchAndSortaEntrar();
-      fetchAndSortNafila();
-      fetchAndSortEmEspera();
+          fetchd().then((accessToken) => {
+          fetchAndSortaEntrar();
+          fetchAndSortNafila();
+          fetchAndSortEmEspera();
+                    });
       }catch(erro){
           }
     
