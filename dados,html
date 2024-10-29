@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caminhada do Terror 2024</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+     <script src="https://alcdn.msauth.net/lib/1.4.17/js/msal.min.js"></script>
+</head>
+<body class="bg-gray-100 p-4 font-sans">
+
+   
+    <!-- Header -->
+    <div class="bg-yellow-500 text-red-800 font-bold text-6xl p-4 text-center tracking-widest">
+        CAMINHADA DO TERROR 2024
+    </div>
+<!-- Time and Group Info -->
+<!-- Time and Group Info -->
+<div class="flex justify-center items-center my-4 space-x-4">
+    <div class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
+        <p>GRUPO(s) A ENTRAR</p>
+        <div id="pos-1" class="text-9xl">3</div>
+        <p class="text-sm">Previsão Horaria</p>
+        <div id="time-01" class="text-xl">5:22</div>
+    </div>
+    <div class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
+        <p>GRUPO(s) A ENTRAR</p>
+        <div id="pos-2" class="text-9xl">3</div>
+        <p class="text-sm">Previsão Horaria</p>
+        <div id="time-02" class="text-xl">5:22</div>
+    </div>
+    <div class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
+        <p>GRUPO(s) A ENTRAR</p>
+        <div id="pos-3" class="text-9xl">3</div>
+        <p class="text-sm">Previsão Horaria</p>
+        <div id="time-03" class="text-xl">5:22</div>
+    </div>
+</div>
+
+
+    <!-- Queue Info Table -->
+    <div class="border-2 border-gray-300 rounded-lg my-4 overflow-hidden">
+        <div class="bg-yellow-400 text-gray-800 font-bold text-center py-2 text-3xl">DEVE AGUARDAR NA FILA OS Nº</div>
+        <div class="grid grid-cols-4 gap-1 text-center text-6xl font-semibold">
+            <div id="pos-4" class="border p-2">4</div>
+            <div id="pos-5" class="border p-2">5</div>
+            <div id="pos-6" class="border p-2">6</div>
+            <div id="pos-7" class="border p-2">7</div>
+        </div>
+        <div class="grid grid-cols-4 gap-1 text-center text-2xl bg-gray-100">
+            <div id="time-04" class="border p-2">5:25</div>
+            <div id="time-05" class="border p-2">5:27</div>
+            <div id="time-06" class="border p-2">5:30</div>
+            <div id="time-07" class="border p-2">5:33</div>
+        </div>
+    </div>
+
+    <!-- Next Groups Info Table -->
+    <div class="border-2 border-gray-300 rounded-lg my-4 overflow-hidden">
+        <div class="bg-green-600 text-white font-bold text-center py-2 text-3xl">
+            PREVISÃO DE ENTRADA PARA OS SEGUINTES GRUPOS - (SÓ DEVEM FORMAR NA FILA QUANDO PASSAREM PARA A LINHA DE CIMA)
+        </div>
+        <div class="grid grid-cols-11 gap-1 text-center text-4xl font-semibold bg-white">
+            <div class="border p-2">8</div>
+            <div class="border p-2">9</div>
+            <div class="border p-2">10</div>
+            <div class="border p-2">11</div>
+            <div class="border p-2">12</div>
+            <div class="border p-2">13</div>
+            <div class="border p-2">14</div>
+            <div class="border p-2">15</div>
+            <div class="border p-2">16</div>
+            <div class="border p-2">17</div>
+            <div class="border p-2">18</div>
+        </div>
+        <div class="grid grid-cols-11 gap-1 text-center text-2xl bg-gray-100">
+            <div id="time-08" class="border p-2">5:36</div>
+            <div id="time-09" class="border p-2">5:38</div>
+            <div id="time-10" class="border p-2">5:41</div>
+            <div id="time-11" class="border p-2">5:44</div>
+            <div id="time-12" class="border p-2">5:47</div>
+            <div id="time-13" class="border p-2">5:49</div>
+            <div id="time-14" class="border p-2">5:52</div>
+            <div id="time-15" class="border p-2">5:55</div>
+            <div id="time-16" class="border p-2">5:58</div>
+            <div id="time-17" class="border p-2">6:00</div>
+            <div id="time-18" class="border p-2">6:03</div>
+        </div>
+    </div>
+    <h1>Authenticate and Acquire Token</h1>
+    <button onclick="signInAndGetToken()">Sign In and Get Token</button>
+     <h1>GetDataverseData</h1>
+    <button onclick="getdata()()">GetDataV3</button>
+    <div id="dataresult" class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
+    </div>
+    
+
+</body>
+<script>
+function getTimevalue(date) {
+    // Format the time (e.g., HH:MM)
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    
+    return `${hours}:${minutes}`;
+}
+
+function updateTime() {
+    fetchAndSortaEntrar();
+    fetchAndSortNafila();
+    fetchAndSortEmEspera();
+    
+    const timeInterval = 3; // Minutes to add for each subsequent time
+
+    // Get the current time
+    const now = new Date();
+
+    // Create new Date instances for each time to prevent overwriting
+    const time = new Date(now);
+    const time3 = new Date(now);
+    const time4 = new Date(now);
+    const time5 = new Date(now);
+    const time6 = new Date(now);
+    const time7 = new Date(now);
+    const time8 = new Date(now);
+    const time9 = new Date(now);
+    const time10 = new Date(now);
+    const time11 = new Date(now);
+    const time12 = new Date(now);
+    const time13 = new Date(now);
+    const time14 = new Date(now);
+    const time15 = new Date(now);
+    const time16 = new Date(now);
+    const time17 = new Date(now);
+    const time18 = new Date(now);
+
+    // Set the minutes by adding intervals
+    time4.setMinutes(now.getMinutes() + timeInterval);
+    time5.setMinutes(now.getMinutes() + 2 * timeInterval);
+    time6.setMinutes(now.getMinutes() + 3 * timeInterval);
+    time7.setMinutes(now.getMinutes() + 4 * timeInterval);
+    time8.setMinutes(now.getMinutes() + 5 * timeInterval);
+    time9.setMinutes(now.getMinutes() + 6 * timeInterval);
+    time10.setMinutes(now.getMinutes() + 7 * timeInterval);
+    time11.setMinutes(now.getMinutes() + 8 * timeInterval);
+    time12.setMinutes(now.getMinutes() + 9 * timeInterval);
+    time13.setMinutes(now.getMinutes() + 10 * timeInterval);
+    time14.setMinutes(now.getMinutes() + 11 * timeInterval);
+    time15.setMinutes(now.getMinutes() + 12 * timeInterval);
+    time16.setMinutes(now.getMinutes() + 13 * timeInterval);
+    time17.setMinutes(now.getMinutes() + 14 * timeInterval);
+    time18.setMinutes(now.getMinutes() + 15 * timeInterval);
+    
+
+    // Update the divs with the formatted times
+    document.getElementById("time-01").textContent = getTimevalue(now);
+    document.getElementById("time-02").textContent = getTimevalue(now)
+    document.getElementById("time-03").textContent = getTimevalue(now);
+    document.getElementById("time-04").textContent = getTimevalue(time4);
+    document.getElementById("time-05").textContent = getTimevalue(time5);
+    document.getElementById("time-06").textContent = getTimevalue(time6);
+    document.getElementById("time-07").textContent = getTimevalue(time7);
+    document.getElementById("time-08").textContent = getTimevalue(time8);
+    document.getElementById("time-09").textContent = getTimevalue(time9);
+    document.getElementById("time-10").textContent = getTimevalue(time10);
+    document.getElementById("time-11").textContent = getTimevalue(time11);
+    document.getElementById("time-12").textContent = getTimevalue(time12);
+    document.getElementById("time-13").textContent = getTimevalue(time13);
+    document.getElementById("time-14").textContent = getTimevalue(time14);
+    document.getElementById("time-15").textContent = getTimevalue(time15);
+    document.getElementById("time-16").textContent = getTimevalue(time16);
+    document.getElementById("time-17").textContent = getTimevalue(time17);
+    document.getElementById("time-18").textContent = getTimevalue(time18);
+    
+
+}
+
+
+async function getServiceToken() {
+    const tenantId = "58f6240d-d7f2-4466-822f-adbd4cb0195d";
+    const clientId = "2517673d-7eeb-4b02-983c-d47acc83afc4";
+    const clientSecret = "kP.8Q~JADaDiO5yKaLjQYBoqQ4SaRUizPcjokac0";
+    const scope = "https://orge71f8d25.crm15.dynamics.com/user_impersonation";
+
+    const url = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
+
+    const params = new URLSearchParams({
+        client_id: clientId,
+        scope: scope,
+        grant_type: "client_credentials",
+        client_secret: clientSecret
+    });
+
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {"Access-Control-Allow-Origin": "*", "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString()
+    });
+
+    const tokenData = await response.json();
+    console.log("Access Token:", tokenData.access_token);
+    return tokenData.access_token;
+}
+// Call the function initially and set an interval if you want it to update regularly
+      
+        // Function to sign in and acquire token
+function signInAndGetToken() {
+    msalClient.loginPopup(loginRequest)
+        .then(loginResponse => {
+            console.log("User logged in:", loginResponse);
+                    // If silent token acquisition fails, fallback to interactive method
+                    msalClient.acquireTokenPopup(tokenRequest)
+                        .then(tokenResponse => {
+                            console.log("Access Token acquired via popup:", tokenResponse.accessToken);
+                            accessToken = tokenResponse.accessToken;
+                            return accessToken;
+                            
+                        })
+                        .catch(error => {
+                            console.error("Token acquisition failed via popup:", error);
+                            return null;
+                        });
+              
+        })
+        .catch(error => {
+            console.error("Login failed:", error);
+            return null;
+        });
+}
+   
+//let accessToken = getServiceToken();
+
+function getdataAentrar() {
+fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000000&$top=3', {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'OData-MaxVersion': '4.0',
+        'OData-Version': '4.0',
+        'Accept': 'application/json'
+    }
+}).then(response => response.json())
+  .then(data => console.log(data));
+}
+async function fetchAndSortaEntrar() {
+    try {
+        // Fetch data from OData endpoint
+        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%828000000", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${accessToken}`, // Replace with actual access token
+                'OData-MaxVersion': '4.0',
+                'OData-Version': '4.0',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json(); // Parse JSON response
+
+        // Extract 'xpto' field values from each record and filter only numeric values
+        const xptoValues = data.value
+            .map(record => record.cr25f_serialnumber)       // Extract xpto values
+            .filter(value => !isNaN(value))   // Keep only numeric values
+            .map(value => Number(value));     // Convert them to numbers
+
+        // Sort xpto values in ascending order
+        xptoValues.sort((a, b) => a - b);
+
+        try{document.getElementById("pos-1").textContent = xptoValues[0];}catch{document.getElementById("pos-1").textContent =""}
+        try{document.getElementById("pos-2").textContent = xptoValues[1];}catch{document.getElementById("pos-2").textContent =""}
+        try{document.getElementById("pos-3").textContent = xptoValues[2];}catch{document.getElementById("pos-3").textContent =""}
+        // Print sorted values to the console
+        console.log("Sorted a entrar values:", xptoValues);
+        return xptoValues;
+    } catch (error) {
+        console.error("Error fetching or processing data:", error);
+    }
+}
+
+async function fetchAndSortNafila() {
+    try {
+        // Fetch data from OData endpoint
+        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%828000001", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${accessToken}`, // Replace with actual access token
+                'OData-MaxVersion': '4.0',
+                'OData-Version': '4.0',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json(); // Parse JSON response
+
+        // Extract 'xpto' field values from each record and filter only numeric values
+        const xptoValues = data.value
+            .map(record => record.cr25f_serialnumber)       // Extract xpto values
+            .filter(value => !isNaN(value))   // Keep only numeric values
+            .map(value => Number(value));     // Convert them to numbers
+
+        // Sort xpto values in ascending order
+        xptoValues.sort((a, b) => a - b);
+
+        try{document.getElementById("pos-4").textContent = xptoValues[0];}catch{document.getElementById("pos-4").textContent =""}
+        try{document.getElementById("pos-5").textContent = xptoValues[1];}catch{document.getElementById("pos-5").textContent =""}
+        try{document.getElementById("pos-6").textContent = xptoValues[2];}catch{document.getElementById("pos-6").textContent =""}
+        try{document.getElementById("pos-7").textContent = xptoValues[2];}catch{document.getElementById("pos-7").textContent =""}
+        // Print sorted values to the console
+        console.log("Sorted na Fila values:", xptoValues);
+        return xptoValues;
+    } catch (error) {
+        console.error("Error fetching or processing data:", error);
+    }
+}
+
+
+async function fetchAndSortEmEspera() {
+    try {
+        // Fetch data from OData endpoint
+        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%828000002", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${accessToken}`, // Replace with actual access token
+                'OData-MaxVersion': '4.0',
+                'OData-Version': '4.0',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json(); // Parse JSON response
+
+        // Extract 'xpto' field values from each record and filter only numeric values
+        const xptoValues = data.value
+            .map(record => record.cr25f_serialnumber)       // Extract xpto values
+            .filter(value => !isNaN(value))   // Keep only numeric values
+            .map(value => Number(value));     // Convert them to numbers
+
+        // Sort xpto values in ascending order
+        xptoValues.sort((a, b) => a - b);
+        try{document.getElementById("pos-8").textContent = xptoValues[0];}catch{document.getElementById("pos-8").textContent =""}
+        try{document.getElementById("pos-9").textContent = xptoValues[1];}catch{document.getElementById("pos-9").textContent =""}
+        try{document.getElementById("pos-10").textContent = xptoValues[2];}catch{document.getElementById("pos-10").textContent =""}
+        try{document.getElementById("pos-11").textContent = xptoValues[2];}catch{document.getElementById("pos-11").textContent =""}
+        try{document.getElementById("pos-12").textContent = xptoValues[0];}catch{document.getElementById("pos-12").textContent =""}
+        try{document.getElementById("pos-13").textContent = xptoValues[1];}catch{document.getElementById("pos-13").textContent =""}
+        try{document.getElementById("pos-14").textContent = xptoValues[2];}catch{document.getElementById("pos-14").textContent =""}
+        try{document.getElementById("pos-15").textContent = xptoValues[2];}catch{document.getElementById("pos-15").textContent =""}
+        try{document.getElementById("pos-16").textContent = xptoValues[0];}catch{document.getElementById("pos-16").textContent =""}
+        try{document.getElementById("pos-17").textContent = xptoValues[1];}catch{document.getElementById("pos-17").textContent =""}
+        try{document.getElementById("pos-18").textContent = xptoValues[2];}catch{document.getElementById("pos-18").textContent =""}
+        // Print sorted values to the console
+        console.log("Sorted em Espera values:", xptoValues);
+        return xptoValues;
+    } catch (error) {
+        console.error("Error fetching or processing data:", error);
+    }
+}
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString(); // Set expiration date
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`; // Create the cookie
+}
+
+// Function to get a cookie by name
+function getCookie(name) {
+    return document.cookie.split('; ').reduce((accumulator, current) => {
+        const [cookieName, cookieValue] = current.split('=');
+        return cookieName === name ? decodeURIComponent(cookieValue) : accumulator;
+    }, null);
+}
+
+// Function to check if a cookie exists
+function cookieExists(name) {
+    return getCookie(name) !== null; // Returns true if the cookie exists
+}
+
+  // MSAL configuration
+  const msalConfig = {
+            auth: {
+                clientId: "2517673d-7eeb-4b02-983c-d47acc83afc4", // Replace with your Azure AD Application (client) ID
+                authority: "https://login.microsoftonline.com/58f6240d-d7f2-4466-822f-adbd4cb0195d", // Replace with your Tenant ID or 'common' for multi-tenant
+                redirectUri: "https://jaocabete.github.io" // Replace with your app's redirect URI
+            },
+             cache: {
+       cacheLocation: 'sessionStorage', // This configures where your cache   will be stored
+        storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
+    }
+        };
+
+        // Initialize MSAL client
+        const msalClient = new Msal.UserAgentApplication(msalConfig);
+
+        // Login request configuration
+        const loginRequest = {
+            scopes: ["openid", "profile", "User.Read"] // Microsoft Graph scopes as an example
+        };
+
+        // Token request configuration
+        const tokenRequest = {
+            scopes: ["https://orge71f8d25.crm15.dynamics.com/user_impersonation"] // Scope needed for the access token
+        };
+    </script>
+</html>
