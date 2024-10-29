@@ -118,9 +118,9 @@ function getTimevalue(date) {
     
     return `${hours}:${minutes}`;
 }       
-    async function fetch() {
+    async function fetchd() {
             try {
-                const response = await fetch('/dados.j');
+                const response = await fetch('dados.j');
                 if (!response.ok) throw new Error('Network response was not ok');
                 const dado = await response.text(); // Read as plain text
                 return dado;
@@ -128,7 +128,7 @@ function getTimevalue(date) {
                 console.error('Error fetching:', error);
             }
         }
-    accessToken = fetch();
+    accessToken = fetchd();
     
 function updateTime() {
     fetchAndSortaEntrar();
