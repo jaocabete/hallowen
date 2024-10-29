@@ -322,10 +322,7 @@ async function fetchSettingMinuto() {
         
         const data = await response.json(); // Parse JSON response
 
-        // Extract 'xpto' field values from each record and filter only numeric values
-        const xptoValues = data.value;
-        
-        //timeInterval
+        timeInterval = data.value[0].cr25f_value;
         
     } catch (error) {
         console.error("Error fetching or processing settings :", error);
