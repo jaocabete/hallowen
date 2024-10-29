@@ -290,7 +290,7 @@ function signInAndGetToken() {
 //let accessToken = getServiceToken();
 
 function getdataAentrar() {
-fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000000&$top=3', {
+fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000000%20and%20statecode%20eq%200&$top=3', {
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -304,7 +304,7 @@ fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistrati
 async function fetchAndSortaEntrar() {
     try {
         // Fetch data from OData endpoint
-        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000000", {
+        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000000%20and%20statecode%20eq%200&$top=3", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -343,7 +343,7 @@ async function fetchAndSortaEntrar() {
 async function fetchAndSortNafila() {
     try {
         // Fetch data from OData endpoint
-        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000001", {
+        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000001%20and%20statecode%20eq%200&$top=5", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -384,7 +384,7 @@ async function fetchAndSortNafila() {
 async function fetchAndSortEmEspera() {
     try {
         // Fetch data from OData endpoint
-        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000002", {
+        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000002%20and%20statecode%20eq%200&$top=11", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
