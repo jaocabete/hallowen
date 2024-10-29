@@ -135,6 +135,9 @@ function getTimevalue(date) {
                 console.error('Error fetching:', error);
             }
         }
+
+const timeInterval = 3; // Minutes to add for each subsequent time
+
 function updateTime() {
      try{
           fetchd().then((result) => {
@@ -163,8 +166,6 @@ function updateTime() {
 */
     
     
-    const timeInterval = 3; // Minutes to add for each subsequent time
-
     // Get the current time
     const now = new Date();
 
