@@ -242,11 +242,11 @@ function signInAndGetToken() {
                         .then(tokenResponse => {
                             console.log("Access Token acquired via popup:", tokenResponse.accessToken);
                             accessToken = tokenResponse.accessToken;
-                            setCookie('myCookie', accessToken, 1); // Set a cookie named 'myCookie' with value 'myValue' that expires in 7 days
+                            //setCookie('myCookie', accessToken, 1); // Set a cookie named 'myCookie' with value 'myValue' that expires in 7 days
                             /*fetchAndSortaEntrar();
                             fetchAndSortNafila();
                             fetchAndSortEmEspera();*/
-                            return tokenResponse.accessToken;
+                            //return tokenResponse.accessToken;
                             
                         })
                         .catch(error => {
