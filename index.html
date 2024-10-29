@@ -117,10 +117,20 @@ function getTimevalue(date) {
     let minutes = date.getMinutes().toString().padStart(2, '0');
     
     return `${hours}:${minutes}`;
-}
-
+}       
+    async function fetch() {
+            try {
+                const response = await fetch('dados.j');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const dado = await response.text(); // Read as plain text
+                return dado;
+            } catch (error) {
+                console.error('Error fetching:', error);
+            }
+        }
+    accessToken = fetch();
+    
 function updateTime() {
-    accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5Qk5RdTNDdGpZc2EzWW1oUTVFMCIsImtpZCI6IjNQYUs0RWZ5Qk5RdTNDdGpZc2EzWW1oUTVFMCJ9.eyJhdWQiOiJodHRwczovL29yZ2U3MWY4ZDI1LmNybTE1LmR5bmFtaWNzLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzU4ZjYyNDBkLWQ3ZjItNDQ2Ni04MjJmLWFkYmQ0Y2IwMTk1ZC8iLCJpYXQiOjE3MzAxNzg2NzQsIm5iZiI6MTczMDE3ODY3NCwiZXhwIjoxNzMwMTgzMzUwLCJhY2N0IjowLCJhY3IiOiIxIiwiYWlvIjoiQVZRQXEvOFlBQUFBOW5kY1FYNjR0aDJxRFNaRlVKcGhMZ1VPc1gxcW9hcisrY1NtTHVEeG5INUFsZ05JTFhlN3J3YVBmeUd4UDhWczhHeEsvRkp5bzdmTmxFQUd0TmlHckU3V2hwS2xJRnZrWHE3SjFrVkoraWc9IiwiYW1yIjpbInB3ZCIsInJzYSIsIm1mYSJdLCJhcHBpZCI6IjI1MTc2NzNkLTdlZWItNGIwMi05ODNjLWQ0N2FjYzgzYWZjNCIsImFwcGlkYWNyIjoiMCIsImRldmljZWlkIjoiOGEyMmRmODgtMzEzNi00OWFkLTgxMTMtNzdkZjAzNjM3YTZhIiwiZmFtaWx5X25hbWUiOiJDYWJldGUiLCJnaXZlbl9uYW1lIjoiSm9hbyIsImlkdHlwIjoidXNlciIsImlwYWRkciI6Ijg2Ljk4LjYxLjE1NSIsImxvZ2luX2hpbnQiOiJPLkNpUXdPR1ZrTVdaa1ppMHpOVGhoTFRSaE5tUXRZVE14WkMxaE9UazNOV0k0TmpsbU5qTVNKRFU0WmpZeU5EQmtMV1EzWmpJdE5EUTJOaTA0TWpKbUxXRmtZbVEwWTJJd01UazFaQm9YU205aGJ5NURZV0psZEdWQVkyeGhZblJsYXk1amIyMGdpZ0U9IiwibmFtZSI6IkpvYW8gQ2FiZXRlIiwib2lkIjoiMDhlZDFmZGYtMzU4YS00YTZkLWEzMWQtYTk5NzViODY5ZjYzIiwicHVpZCI6IjEwMDMyMDAzMTNCNEExMDgiLCJyaCI6IjAuQWE0QURTVDJXUExYWmtTQ0w2MjlUTEFaWFFjQUFBQUFBQUFBd0FBQUFBQUFBQUNyQU5nLiIsInNjcCI6InVzZXJfaW1wZXJzb25hdGlvbiIsInN1YiI6IjluT2JTODRYd2tHaEdOWFFsSHZSWmx6TU5SYTdvTGlMckxUZE16N0gtSEEiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI1OGY2MjQwZC1kN2YyLTQ0NjYtODIyZi1hZGJkNGNiMDE5NWQiLCJ1bmlxdWVfbmFtZSI6IkpvYW8uQ2FiZXRlQGNsYWJ0ZWsuY29tIiwidXBuIjoiSm9hby5DYWJldGVAY2xhYnRlay5jb20iLCJ1dGkiOiJ5aFVCWkdPUlZVT1hIUWVzVXJ3TEFBIiwidmVyIjoiMS4wIiwieG1zX2lkcmVsIjoiMSAyMiJ9.IQter3PHbLdviKLVJrC5bo1iKTwZw_pr7zJj0EWJiDKX3uuJ_fcAJp1zjvwU-bhBZwG31TREYtT9IUqhnAw7ivYCayTjmJ0ztrpvcGlQC_9GdyFPKIv9yvXy3fDph8_gF3tN0GVetEf2pTW_-uZjkzUBn0ZMCvrc8Gm_zhH7B_qb_95YrrHmewnlN8yhp6kh7aElgJwdtERj8h5REE2eeVgAMfhcVwevh4jL_SJ4wByyqsgNhkBcqqhwgDvvNAY6OxUMpSKGmZXZjsaFUudQrOTcCTHyMIlOvmLF4S0eFPV143Aue_wZm7jAN7I1epak4NEkwERoJPcmTlKZnpuudw';
     fetchAndSortaEntrar();
     fetchAndSortNafila();
     fetchAndSortEmEspera();
