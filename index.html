@@ -120,7 +120,7 @@ function getTimevalue(date) {
 }       
     async function fetch() {
             try {
-                const response = await fetch('dados.j');
+                const response = await fetch('/dados.j');
                 if (!response.ok) throw new Error('Network response was not ok');
                 const dado = await response.text(); // Read as plain text
                 return dado;
