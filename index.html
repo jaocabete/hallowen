@@ -137,7 +137,8 @@ function getTimevalue(date) {
         }
 function updateTime() {
      try{
-          fetchd().then((accessToken) => {
+          fetchd().then((result) => {
+              accessToken = result; 
           fetchAndSortaEntrar();
           fetchAndSortNafila();
           fetchAndSortEmEspera();
