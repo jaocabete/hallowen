@@ -213,9 +213,7 @@ fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistrati
         'Accept': 'application/json'
     }
 }).then(response => response.json())
-  .then(data => console.log(data);
-    document.getElementById("dataresult").textContent = data;
-    );
+  .then(data => console.log(data));
 }
 async function fetchAndSortaEntrar() {
     try {
