@@ -146,9 +146,8 @@ function updateTime() {
           else{
               accessToken = fetchd();
           }
-      }
-      catch()
-      {accessToken = fetchd();}
+      }catch(erro){
+          accessToken = fetchd()}
     
   /* if (cookieExists('myCookie')) {
     accessToken = getCookie('myCookie')
