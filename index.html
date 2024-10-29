@@ -91,6 +91,16 @@
     </div> 
 </body>
 <script>
+
+    function isPromise(value) {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        typeof value.then === 'function' &&
+        typeof value.catch === 'function'
+    );
+}
+    
     // Function to set a cookie
 function setCookie(name, value, days) {
     const expires = new Date(Date.now() + days * 864e5).toUTCString(); // Set expiration date
@@ -131,9 +141,12 @@ function getTimevalue(date) {
     accessToken = fetchd();
     
 function updateTime() {
-    fetchAndSortaEntrar();
-    fetchAndSortNafila();
-    fetchAndSortEmEspera();
+    if (!isPromise(accessToken)){
+        fetchAndSortaEntrar();
+        fetchAndSortNafila();
+        fetchAndSortEmEspera();
+    }
+     accessToken = fetchd();
     
   /* if (cookieExists('myCookie')) {
     accessToken = getCookie('myCookie')
