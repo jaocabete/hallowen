@@ -92,9 +92,6 @@
 </body>
 <script>
 
-    let  timeInterval =  3;
-
-    
   function isPending(promise) {
     const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 0, "pending"));
 
@@ -164,13 +161,14 @@ function updateTime() {
     fetchAndSortNafila();
     fetchAndSortEmEspera();
 } 
-*/
+*/const time =  interval = 3;
+     try{
  fetchSettingMinuto().then((result) => {
 
 
     
-     timeInterval =  result ;
-    // Get the current time
+         //timeInterval =  result ;
+         // Get the current time
     const now = new Date();
 
     // Create new Date instances for each time to prevent overwriting
@@ -233,6 +231,10 @@ function updateTime() {
     document.getElementById("time-19").textContent = getTimevalue(time19);
     
 });
+         }catch(){
+          
+     }
+
 }
 
 
