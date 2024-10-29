@@ -135,15 +135,18 @@ function getTimevalue(date) {
                 console.error('Error fetching:', error);
             }
         }
-    accessToken = fetchd();
     
 function updateTime() {
-    if (!isPending(accessToken)){
-        fetchAndSortaEntrar();
-        fetchAndSortNafila();
-        fetchAndSortEmEspera();
-    }
-     accessToken = fetchd();
+     
+      try{
+          if(len(accessToken)>1){
+      fetchAndSortaEntrar();
+      fetchAndSortNafila();
+      fetchAndSortEmEspera();}
+          else{
+              accessToken = fetchd();
+          }
+      }catch(){accessToken = fetchd();};
     
   /* if (cookieExists('myCookie')) {
     accessToken = getCookie('myCookie')
