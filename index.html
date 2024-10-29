@@ -251,36 +251,25 @@ setInterval(updateTime, 60000); // Update every minute
         };
 
         // Function to sign in and acquire token
-        function signInAndGetToken() {
-            msalClient.loginPopup(loginRequest)
-                .then(loginResponse => {
-                    console.log("User logged in:", loginResponse);
-                    
-                    // After successful login, request an access token
-                    msalClient.acquireTokenSilent(tokenRequest)
+function signInAndGetToken() {
+    msalClient.loginPopup(loginRequest)
+        .then(loginResponse => {
+            console.log("User logged in:", loginResponse);
+                    // If silent token acquisition fails, fallback to interactive method
+                    msalClient.acquireTokenPopup(tokenRequest)
                         .then(tokenResponse => {
-                            console.log("Access Token acquired:", tokenResponse.accessToken);
+                            console.log("Access Token acquired via popup:", tokenResponse.accessToken);
                             accessToken = tokenResponse.accessToken;
-                            // Use the access token in your application logic
+                            
                         })
                         .catch(error => {
-                            console.error("Silent token acquisition failed:", error);
-
-                            // If silent token acquisition fails, fallback to interactive method
-                            msalClient.acquireTokenPopup(tokenRequest)
-                                .then(tokenResponse => {
-                                    console.log("Access Token acquired via popup:", tokenResponse.accessToken);
-                                    accessToken = tokenResponse.accessToken;
-                                    
-                                })
-                                .catch(error => {
-                                    console.error("Token acquisition failed via popup:", error);
-                                });
+                            console.error("Token acquisition failed via popup:", error);
                         });
-                })
-                .catch(error => {
-                    console.error("Login failed:", error);
-                });
-        }
+              
+        })
+        .catch(error => {
+            console.error("Login failed:", error);
+        });
+}
     </script>
 </html>
