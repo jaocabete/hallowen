@@ -106,9 +106,17 @@ function getTimevalue(date) {
 }
 
 function updateTime() {
+     if (cookieExists('myCookie')) {
+    accessToken = getCookie('myCookie')
+    console.log('Cookie exists:', accessToken); // Print the cookie value
     fetchAndSortaEntrar();
     fetchAndSortNafila();
     fetchAndSortEmEspera();
+} else {
+    console.log('Cookie does not exist');
+    // Example usage
+    setCookie('myCookie', signInAndGetToken(), 1); // Set a cookie named 'myCookie' with value 'myValue' that expires in 7 days
+} 
     
     const timeInterval = 3; // Minutes to add for each subsequent time
 
@@ -213,7 +221,7 @@ function signInAndGetToken() {
                         .then(tokenResponse => {
                             console.log("Access Token acquired via popup:", tokenResponse.accessToken);
                             accessToken = tokenResponse.accessToken;
-                            return accessToken;
+                            return tokenResponse.accessToken;
                             
                         })
                         .catch(error => {
@@ -256,7 +264,7 @@ async function fetchAndSortaEntrar() {
             }
         });
 
-        if (!response.ok) {signInAndGetToken();throw new Error('Network response was not ok');}
+        if (!response.ok) {setCookie('myCookie', signInAndGetToken(), 1);throw new Error('Network response was not ok');}
 
         const data = await response.json(); // Parse JSON response
 
