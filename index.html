@@ -41,7 +41,7 @@
     <!-- Queue Info Table -->
     <div class="border-2 border-gray-300 rounded-lg my-4 overflow-hidden">
         <div class="bg-yellow-400 text-gray-800 font-bold text-center py-2 text-6xl">DEVE AGUARDAR NA FILA OS Nº</div>
-        <div class="grid grid-cols-4 gap-1 text-center text-8xl font-semibold">
+        <div class="grid grid-cols-4 gap-1 text-center text-7xl font-semibold">
             <div id="pos-4" class="border p-2">4</div>
             <div id="pos-5" class="border p-2">5</div>
             <div id="pos-6" class="border p-2">6</div>
@@ -350,6 +350,7 @@ async function fetchAndSortNafila() {
         try{document.getElementById("pos-5").textContent = xptoValues[1];}catch{document.getElementById("pos-5").textContent =""}
         try{document.getElementById("pos-6").textContent = xptoValues[2];}catch{document.getElementById("pos-6").textContent =""}
         try{document.getElementById("pos-7").textContent = xptoValues[3];}catch{document.getElementById("pos-7").textContent =""}
+        try{document.getElementById("pos-8").textContent = xptoValues[4];}catch{document.getElementById("pos-8").textContent =""}
         // Print sorted values to the console
         console.log("Sorted na Fila values:", xptoValues);
         return xptoValues;
@@ -385,17 +386,18 @@ async function fetchAndSortEmEspera() {
 
         // Sort xpto values in ascending order
         xptoValues.sort((a, b) => a - b);
-        try{document.getElementById("pos-8").textContent = xptoValues[0];}catch{document.getElementById("pos-8").textContent =""}
-        try{document.getElementById("pos-9").textContent = xptoValues[1];}catch{document.getElementById("pos-9").textContent =""}
-        try{document.getElementById("pos-10").textContent = xptoValues[3];}catch{document.getElementById("pos-10").textContent =""}
-        try{document.getElementById("pos-11").textContent = xptoValues[4];}catch{document.getElementById("pos-11").textContent =""}
-        try{document.getElementById("pos-12").textContent = xptoValues[5];}catch{document.getElementById("pos-12").textContent =""}
-        try{document.getElementById("pos-13").textContent = xptoValues[6];}catch{document.getElementById("pos-13").textContent =""}
-        try{document.getElementById("pos-14").textContent = xptoValues[7];}catch{document.getElementById("pos-14").textContent =""}
-        try{document.getElementById("pos-15").textContent = xptoValues[8];}catch{document.getElementById("pos-15").textContent =""}
-        try{document.getElementById("pos-16").textContent = xptoValues[9];}catch{document.getElementById("pos-16").textContent =""}
-        try{document.getElementById("pos-17").textContent = xptoValues[10];}catch{document.getElementById("pos-17").textContent =""}
-        try{document.getElementById("pos-18").textContent = xptoValues[11];}catch{document.getElementById("pos-18").textContent =""}
+        try{document.getElementById("pos-9").textContent = xptoValues[0];}catch{document.getElementById("pos-9").textContent =""}
+        try{document.getElementById("pos-10").textContent = xptoValues[1];}catch{document.getElementById("pos-10").textContent =""}
+        try{document.getElementById("pos-11").textContent = xptoValues[2];}catch{document.getElementById("pos-11").textContent =""}
+        try{document.getElementById("pos-12").textContent = xptoValues[3];}catch{document.getElementById("pos-12").textContent =""}
+        try{document.getElementById("pos-13").textContent = xptoValues[4];}catch{document.getElementById("pos-13").textContent =""}
+        try{document.getElementById("pos-14").textContent = xptoValues[5];}catch{document.getElementById("pos-14").textContent =""}
+        try{document.getElementById("pos-15").textContent = xptoValues[6];}catch{document.getElementById("pos-15").textContent =""}
+        try{document.getElementById("pos-16").textContent = xptoValues[7];}catch{document.getElementById("pos-16").textContent =""}
+        try{document.getElementById("pos-17").textContent = xptoValues[8];}catch{document.getElementById("pos-17").textContent =""}
+        try{document.getElementById("pos-18").textContent = xptoValues[9];}catch{document.getElementById("pos-18").textContent =""}
+        try{document.getElementById("pos-19").textContent = xptoValues[10];}catch{document.getElementById("pos-19").textContent =""}
+        
         // Print sorted values to the console
         console.log("Sorted em Espera values:", xptoValues);
         return xptoValues;
