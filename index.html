@@ -97,6 +97,24 @@
 
 </body>
 <script>
+    // Function to set a cookie
+function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString(); // Set expiration date
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`; // Create the cookie
+}
+
+// Function to get a cookie by name
+function getCookie(name) {
+    return document.cookie.split('; ').reduce((accumulator, current) => {
+        const [cookieName, cookieValue] = current.split('=');
+        return cookieName === name ? decodeURIComponent(cookieValue) : accumulator;
+    }, null);
+}
+
+// Function to check if a cookie exists
+function cookieExists(name) {
+    return getCookie(name) !== null; // Returns true if the cookie exists
+}
 function getTimevalue(date) {
     // Format the time (e.g., HH:MM)
     let hours = date.getHours().toString().padStart(2, '0');
@@ -373,24 +391,7 @@ async function fetchAndSortEmEspera() {
     }
 }
 
-// Function to set a cookie
-function setCookie(name, value, days) {
-    const expires = new Date(Date.now() + days * 864e5).toUTCString(); // Set expiration date
-    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`; // Create the cookie
-}
 
-// Function to get a cookie by name
-function getCookie(name) {
-    return document.cookie.split('; ').reduce((accumulator, current) => {
-        const [cookieName, cookieValue] = current.split('=');
-        return cookieName === name ? decodeURIComponent(cookieValue) : accumulator;
-    }, null);
-}
-
-// Function to check if a cookie exists
-function cookieExists(name) {
-    return getCookie(name) !== null; // Returns true if the cookie exists
-}
 
   // MSAL configuration
   const msalConfig = {
