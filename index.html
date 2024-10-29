@@ -90,7 +90,7 @@
     <h1>Authenticate and Acquire Token</h1>
     <button onclick="signInAndGetToken()">Sign In and Get Token</button>
      <h1>GetDataverseData</h1>
-    <button onclick="getdata()()">GetDataV1</button>
+    <button onclick="getdata()()">GetDataV2</button>
     <div id="dataresult" class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
     </div>
     
@@ -247,7 +247,7 @@ setInterval(updateTime, 60000); // Update every minute
 
         // Token request configuration
         const tokenRequest = {
-            scopes: ["user_impersonation"] // Scope needed for the access token
+            scopes: ["https://orge71f8d25.crm15.dynamics.com/user_impersonation"] // Scope needed for the access token
         };
 
         // Function to sign in and acquire token
