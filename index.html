@@ -90,7 +90,7 @@
     <h1>Authenticate and Acquire Token</h1>
     <button onclick="signInAndGetToken()">Sign In and Get Token</button>
      <h1>GetDataverseData</h1>
-    <button onclick="getdata()()">GetDataV2</button>
+    <button onclick="getdata()()">GetDataV3</button>
     <div id="dataresult" class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
     </div>
     
@@ -106,6 +106,8 @@ function getTimevalue(date) {
 }
 
 function updateTime() {
+    fetchAndSortaEntrar();
+    
     const timeInterval = 3; // Minutes to add for each subsequent time
 
     // Get the current time
@@ -201,9 +203,8 @@ async function getServiceToken() {
 
 //let accessToken = getServiceToken();
 
-function getdata() {
-
-fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$top=10', {
+function getdataAentrar() {
+fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000000&$top=3', {
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -212,14 +213,49 @@ fetch('https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistrati
         'Accept': 'application/json'
     }
 }).then(response => response.json())
-  .then(data => console.log(data));
+  .then(data => console.log(data);
     document.getElementById("dataresult").textContent = data;
-    
+    );
+}
+async function fetchAndSortaEntrar() {
+    try {
+        // Fetch data from OData endpoint
+        const response = await fetch("https://orge71f8d25.crm15.dynamics.com/api/data/v9.2/cr25f_userregistration4a2bs?$filter=cr25f_estadoposicao%20eq%20828000000&$top=3", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${accessToken}` // Replace with actual access token
+                'OData-MaxVersion': '4.0',
+                'OData-Version': '4.0',
+                'Accept': 'application/json'
+            }
+        });
 
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json(); // Parse JSON response
+
+        // Extract 'xpto' field values from each record and filter only numeric values
+        const xptoValues = data.value
+            .map(record => record.cr25f_serialnumber)       // Extract xpto values
+            .filter(value => !isNaN(value))   // Keep only numeric values
+            .map(value => Number(value));     // Convert them to numbers
+
+        // Sort xpto values in ascending order
+        xptoValues.sort((a, b) => a - b);
+
+        // Print sorted values to the console
+        console.log("Sorted xpto values:", xptoValues);
+        return xptoValues;
+    } catch (error) {
+        console.error("Error fetching or processing data:", error);
+    }
 }
 
 
+
 updateTime();
+signInAndGetToken()
 setInterval(updateTime, 60000); // Update every minute
 
     </script>
