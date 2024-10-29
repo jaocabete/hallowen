@@ -135,18 +135,17 @@ function getTimevalue(date) {
                 console.error('Error fetching:', error);
             }
         }
-let accessToken = "";    
 function updateTime() {
      try{
-          if(len(accessToken)>1){
+          const accessToken = await fetchd();
       fetchAndSortaEntrar();
       fetchAndSortNafila();
       fetchAndSortEmEspera();}
-          else{
-              accessToken = fetchd();
+          
+              
           }
       }catch(erro){
-          accessToken = fetchd()}
+          }
     
   /* if (cookieExists('myCookie')) {
     accessToken = getCookie('myCookie')
