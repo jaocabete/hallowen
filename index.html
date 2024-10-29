@@ -200,7 +200,29 @@ async function getServiceToken() {
     return tokenData.access_token;
 }
 // Call the function initially and set an interval if you want it to update regularly
-
+      
+        // Function to sign in and acquire token
+function signInAndGetToken() {
+    msalClient.loginPopup(loginRequest)
+        .then(loginResponse => {
+            console.log("User logged in:", loginResponse);
+                    // If silent token acquisition fails, fallback to interactive method
+                    msalClient.acquireTokenPopup(tokenRequest)
+                        .then(tokenResponse => {
+                            console.log("Access Token acquired via popup:", tokenResponse.accessToken);
+                            accessToken = tokenResponse.accessToken;
+                            
+                        })
+                        .catch(error => {
+                            console.error("Token acquisition failed via popup:", error);
+                        });
+              
+        })
+        .catch(error => {
+            console.error("Login failed:", error);
+        });
+}
+   
 //let accessToken = getServiceToken();
 
 function getdataAentrar() {
@@ -251,15 +273,8 @@ async function fetchAndSortaEntrar() {
 }
 
 
-
-updateTime();
-signInAndGetToken()
-setInterval(updateTime, 60000); // Update every minute
-
-    </script>
-     <script>
-        // MSAL configuration
-        const msalConfig = {
+  // MSAL configuration
+  const msalConfig = {
             auth: {
                 clientId: "2517673d-7eeb-4b02-983c-d47acc83afc4", // Replace with your Azure AD Application (client) ID
                 authority: "https://login.microsoftonline.com/58f6240d-d7f2-4466-822f-adbd4cb0195d", // Replace with your Tenant ID or 'common' for multi-tenant
@@ -284,26 +299,9 @@ setInterval(updateTime, 60000); // Update every minute
             scopes: ["https://orge71f8d25.crm15.dynamics.com/user_impersonation"] // Scope needed for the access token
         };
 
-        // Function to sign in and acquire token
-function signInAndGetToken() {
-    msalClient.loginPopup(loginRequest)
-        .then(loginResponse => {
-            console.log("User logged in:", loginResponse);
-                    // If silent token acquisition fails, fallback to interactive method
-                    msalClient.acquireTokenPopup(tokenRequest)
-                        .then(tokenResponse => {
-                            console.log("Access Token acquired via popup:", tokenResponse.accessToken);
-                            accessToken = tokenResponse.accessToken;
-                            
-                        })
-                        .catch(error => {
-                            console.error("Token acquisition failed via popup:", error);
-                        });
-              
-        })
-        .catch(error => {
-            console.error("Login failed:", error);
-        });
-}
+
+updateTime();
+signInAndGetToken()
+setInterval(updateTime, 60000); // Update every minute
     </script>
 </html>
