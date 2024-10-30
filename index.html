@@ -187,13 +187,8 @@ async function updateTime() {
 } 
 */
 
-try{
-const mytimeInterval = await fetchSettingMinuto();
 
-}catch(erro){
-    console.error("Error getting timeinterval :", erro);
-    const mytimeInterval =3;
-}
+const mytimeInterval = await fetchSettingMinuto();
          //timeInterval =  result ;
          // Get the current time
     const now = new Date();
