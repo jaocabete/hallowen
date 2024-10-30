@@ -91,7 +91,7 @@
     <div id="token" class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
     </div>
     <button onclick="commitToGitHub();">Commit</button>
-        <div id="commitresult" class="bg-red-600 text-white font-bold text-3xl p-4 rounded text-center">
+        <div id="commitresult" class="bg-green-600 text-white font-bold text-3xl p-4 rounded text-center">
     </div>
 
 
@@ -136,8 +136,8 @@ const commitMessage = 'Updated file content with JavaScript'; // Commit message
 const token = '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';
 
     // Encode content in Base64 (GitHub API requires this)
-    const base64Content = Buffer.from(content).toString('base64');
-
+   const base64Content = btoa(content); // Encodes the file content in base64
+    
     // Get the SHA of the existing file (if it exists)
     const sha = await getFileSHA(owner, repo, filePath);
 
