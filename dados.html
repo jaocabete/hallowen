@@ -90,7 +90,7 @@
     <button onclick="signInAndGetToken()">Authenti</button>
     <div id="token" class="bg-green-600 text-white font-bold text-3xl p-4 rounded text-center">
     </div>
-    <input type="text" id="myTextBox" placeholder="Enter text here">
+    <p><input type="text" id="myTextBox" placeholder="Enter text here"></p>
     <button onclick="commitToGitHub();">Commit</button>
         <div id="commitresult" class="bg-green-600 text-white font-bold text-3xl p-4 rounded text-center">
             cooool
@@ -139,7 +139,7 @@ const commitMessage = 'Updated file content with JavaScript'; // Commit message
     const textBox = document.getElementById("myTextBox");
     
     // Get the value of the text box
-    const token = = textBox.value;
+    const token = textBox.value;
     
 
     // Encode content in Base64 (GitHub API requires this)
