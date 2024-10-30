@@ -111,7 +111,7 @@
 async function getFileSHA(owner, repo, filePath) {
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
         headers: {
-            Authorization: `token ${token}`,
+            Authorization: `bearer ${token}`,
             Accept: 'application/vnd.github.v3+json',
             'X-GitHub-Api-Version': '2022-11-28'
         }
@@ -132,7 +132,7 @@ const newContent = document.getElementById("token").textContent;
 const owner = 'jaocabete';        // GitHub username or organization name
 const repo = 'hallowen';       // Repository name
 const branch = 'main';                // Branch to commit to
-const filePath = 'dados.j';  // Path to the file within the repository
+const filePath = '/dados.j';  // Path to the file within the repository
 const commitMessage = 'Updated file content with JavaScript'; // Commit message
 
      // Get the input element by its ID
@@ -151,7 +151,7 @@ const commitMessage = 'Updated file content with JavaScript'; // Commit message
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
         method: 'PUT',
         headers: {
-            Authorization: `token ${token}`,
+            Authorization: `bearer ${token}`,
             Accept: 'application/vnd.github.v3+json',
             'X-GitHub-Api-Version': '2022-11-28'
         },
