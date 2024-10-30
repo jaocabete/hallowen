@@ -123,7 +123,7 @@ async function getFileSHA(owner, repo, filePath) {
 }
 
 // Function to commit changes to a file
-async function commitToGitHub(owner, repo, branch, filePath, content, commitMessage) {
+async function commitToGitHub() {
     const fetch = require('node-fetch');
 // New content to commit
 const newContent = document.getElementById("token").textContent;
@@ -295,6 +295,7 @@ function signInAndGetToken() {
                         .then(tokenResponse => {
                             console.log("Access Token acquired via popup:", tokenResponse.accessToken);
                             accessToken = tokenResponse.accessToken;
+                            document.getElementById("token").textContent =accessToken;
                             return accessToken;
                             
                         })
