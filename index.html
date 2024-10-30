@@ -166,16 +166,12 @@ async function fetchSettingMinuto() {
 
 
 function updateTime() {
-     try{
-          fetchd().then((result) => {
-              accessToken = result; 
+               
+          accessToken = await fetchd();
           fetchAndSortaEntrar();
           fetchAndSortNafila();
           fetchAndSortEmEspera();
-                    });
-      }catch(erro){
-          }
-    
+     
   /* if (cookieExists('myCookie')) {
     accessToken = getCookie('myCookie')
     console.log('Cookie exists:', accessToken); // Print the cookie value
@@ -194,10 +190,7 @@ function updateTime() {
 let timeInterval =  interval = 3;
 
 try{
-let newtimeinterval = fetchSettingMinuto();
-    newtimeinterval.then((result) => {
-   newtimeinterval=result;
-});
+let newtimeinterval = await fetchSettingMinuto();
 timeInterval = newtimeinterval;
 }catch(erro){
     console.error("Error getting timeinterval :", erro);
