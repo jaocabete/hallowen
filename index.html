@@ -194,7 +194,7 @@ function updateTime() {
 const timeInterval =  interval = 3;
 
 try{
-let newtimeinterval = fetchSettingMinuto();
+let newtimeinterval = fetchSettingMinuto().then();
 timeInterval = newtimeinterval;
 }catch(erro){
     console.error("Error getting timeinterval :", erro);
