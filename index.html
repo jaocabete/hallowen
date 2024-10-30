@@ -213,7 +213,7 @@ const mytimeInterval = await fetchSettingMinuto();
     const time19 = new Date(now);
 
     // Set the minutes by adding intervals
-    time4.setSeconds(now.getSeconds() + mytimeInterval);
+    time4.setSeconds(now.getSeconds() +(1* mytimeInterval));
     time5.setSeconds(now.getSeconds() + (2 * mytimeInterval));
     time6.setSeconds(now.getSeconds() + (3 * mytimeInterval));
     time7.setSeconds(now.getSeconds() + (4 * mytimeInterval));
