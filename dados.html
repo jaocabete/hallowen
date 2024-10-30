@@ -90,6 +90,7 @@
     <button onclick="signInAndGetToken()">Authenti</button>
     <div id="token" class="bg-green-600 text-white font-bold text-3xl p-4 rounded text-center">
     </div>
+    <input type="text" id="myTextBox" placeholder="Enter text here">
     <button onclick="commitToGitHub();">Commit</button>
         <div id="commitresult" class="bg-green-600 text-white font-bold text-3xl p-4 rounded text-center">
             cooool
@@ -134,8 +135,12 @@ const branch = 'main';                // Branch to commit to
 const filePath = 'dados.j';  // Path to the file within the repository
 const commitMessage = 'Updated file content with JavaScript'; // Commit message
 
-// Personal Access Token (PAT) - Replace with your actual token (keep it secure)
-const token = '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';
+     // Get the input element by its ID
+    const textBox = document.getElementById("myTextBox");
+    
+    // Get the value of the text box
+    const token = = textBox.value;
+    
 
     // Encode content in Base64 (GitHub API requires this)
    const base64Content = btoa(newContent); // Encodes the file content in base64
